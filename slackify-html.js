@@ -126,7 +126,7 @@ function walkTableBody(dom) {
 }
 
 
-function walk(dom, nesting) {
+function walk(dom, nesting, bold) {
   if (!nesting) {
     nesting = 0;
   }
@@ -152,42 +152,46 @@ function walk(dom, nesting) {
           case 'h4':
           case 'strong':
           case 'b':
-            content = walk(el.children);
-            var contentArr = content.split('\n');
-            var innerOutput = '';
-            for (var i=0; i<contentArr.length; i++) {
-              content = contentArr[i];
-              if (content.trim() !== '') {
-                var prefixSpace = false;
-                var suffixSpace = false;
-                if (content && content.charAt(0) === ' ') {
-                  content = content.substr(1, content.length);
-                  prefixSpace = true;
+            content = walk(el.children, false, false);
+            if (bold){
+              var contentArr = content.split('\n');
+              var innerOutput = '';
+              for (var i=0; i<contentArr.length; i++) {
+                content = contentArr[i];
+                if (content.trim() !== '') {
+                  var prefixSpace = false;
+                  var suffixSpace = false;
+                  if (content && content.charAt(0) === ' ') {
+                    content = content.substr(1, content.length);
+                    prefixSpace = true;
+                  }
+                  if (content && content.charAt(content.length - 1) === ' ') {
+                    content = content.substr(0, content.length - 1);
+                    suffixSpace = true;
+                  }
+                  if (prefixSpace) {
+                    innerOutput += ' ';
+                  }
+                  if (content.charAt(0) === '*' &&
+                      content.charAt(content.length - 1) === '*') {
+                    innerOutput += content;
+                  }
+                  else {
+                    innerOutput += '*' + content + '*';
+                  }
+                  if (suffixSpace) {
+                    innerOutput += ' ';
+                  }
                 }
-                if (content && content.charAt(content.length - 1) === ' ') {
-                  content = content.substr(0, content.length - 1);
-                  suffixSpace = true;
-                }
-                if (prefixSpace) {
-                  innerOutput += ' ';
-                }
-                if (content.charAt(0) === '*' &&
-                    content.charAt(content.length - 1) === '*') {
-                  innerOutput += content;
-                }
-                else {
-                  innerOutput += '*' + content + '*';
-                }
-                if (suffixSpace) {
-                  innerOutput += ' ';
+                if (i < contentArr.length - 1) {
+                  innerOutput += '\n';
                 }
               }
-              if (i < contentArr.length - 1) {
-                innerOutput += '\n';
-              }
+              out += innerOutput;
+            } else {
+              out = content;
             }
-            out += innerOutput;
-
+            
             switch (el.name) {
               case 'h1':
               case 'h2':
