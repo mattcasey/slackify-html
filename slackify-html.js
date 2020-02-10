@@ -126,7 +126,7 @@ function walkTableBody(dom) {
 }
 
 
-function walk(dom, nesting, bold) {
+function walk(dom, nesting, inHeader) {
   if (!nesting) {
     nesting = 0;
   }
@@ -152,8 +152,8 @@ function walk(dom, nesting, bold) {
           case 'h4':
           case 'strong':
           case 'b':
-            content = walk(el.children, false, false);
-            if (bold){
+            content = walk(el.children, false, true);
+            if (!inHeader){
               var contentArr = content.split('\n');
               var innerOutput = '';
               for (var i=0; i<contentArr.length; i++) {
@@ -187,11 +187,11 @@ function walk(dom, nesting, bold) {
                   innerOutput += '\n';
                 }
               }
-              out += "what the f..";
+              out += innerOutput;
             } else {
               out = content;
             }
-
+            
             switch (el.name) {
               case 'h1':
               case 'h2':
