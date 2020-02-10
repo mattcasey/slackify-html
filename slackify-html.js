@@ -187,11 +187,11 @@ function walk(dom, nesting, bold) {
                   innerOutput += '\n';
                 }
               }
-              out += innerOutput;
+              out += "what the f..";
             } else {
               out = content;
             }
-            
+
             switch (el.name) {
               case 'h1':
               case 'h2':
