@@ -149,6 +149,12 @@ function walk(dom, nesting) {
           case 'h2':
           case 'h3':
           case 'h4':
+            // add whitespace before H tags to make them stand out
+            if (out.length > 0) {
+              out += '\n';
+            }
+            // fall-through...
+
           case 'strong':
           case 'b':
             content = walk(el.children);
