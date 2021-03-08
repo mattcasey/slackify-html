@@ -1,6 +1,6 @@
 {
   "name": "slackify-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "convert simple html to slack markdown",
   "main": "slackify-html.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrq-cz/slackify-html.git"
+    "url": "https://github.com/guruhq/slackify-html.git"
   },
   "keywords": [
     "html",
@@ -21,9 +21,9 @@
   "author": "mrq",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mrq-cz/slackify-html/issues"
+    "url": "https://github.com/guruhq/slackify-html/issues"
   },
-  "homepage": "https://github.com/mrq-cz/slackify-html",
+  "homepage": "https://github.com/guruhq/slackify-html",
   "dependencies": {
     "html-entities": "^1.1.3",
     "htmlparser": "^1.7.7"
